@@ -4,12 +4,14 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 import { CharacterService } from '../services/character.service';
 import { CharacterResponse } from '../services/character-response.dto';
+import { CharacterCardComponent } from '../character-card/character-card.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
     ReactiveFormsModule,
+    CharacterCardComponent,
     CommonModule
   ],
   templateUrl: './home.component.html',
