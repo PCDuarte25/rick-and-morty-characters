@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 
 @Component({
   selector: 'app-character-card',
@@ -11,4 +11,8 @@ import { Component, Input } from '@angular/core';
 })
 export class CharacterCardComponent {
   @Input() character: any;
+
+  viewDetails() {
+    // Implementar depois da paginação.
+  }
 }

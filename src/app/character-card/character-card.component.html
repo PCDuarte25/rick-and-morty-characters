@@ -11,5 +11,17 @@
         • {{ character.status === 'Alive' ? 'Vivo' : 'Morto' }}
       </span>
     </div>
+
+    <div class="mb-2">
+      <small class="text-muted d-block">Espécie: {{ character.species || 'Humano' }}</small>
+      <small class="text-muted d-block">Origem: {{ character.origin?.name || 'Terra C-137' }}</small>
+    </div>
+
+    <p class="card-text mb-1">Episódios: {{ character.episode.length }}</p>
+    <p class="card-text">Localização: {{ character.location.name }}</p>
+
+    <button (click)="viewDetails()" class="btn btn-outline-primary w-100">
+      Ver mais detalhes
+    </button>
   </div>
 </div>
