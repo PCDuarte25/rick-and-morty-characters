@@ -16,4 +16,14 @@
     </div>
     <small class="text-muted">Total de personagens: {{ maxTotalCharacters() }}</small>
   </div>
+
+  <h4 class="mb-3 text-secondary">
+    {{ totalCharacters() }} resultados encontrados
+    <span *ngIf="hasSearchTerm() || hasStatus()">
+      para
+      <span *ngIf="hasSearchTerm()">"{{ searchTerm() }}"</span>
+      <span *ngIf="hasSearchTerm() && hasStatus()"> com o status </span>
+      <span *ngIf="hasStatus()">"{{ statusLabel() }}"</span>
+    </span>
+  </h4>
 </div>
