@@ -20,8 +20,10 @@ export class HomeComponent {
   statusControl = new FormControl('');
   currentPage = signal(1);
 
+  totalCharacters = signal(0);
   maxTotalCharacters = signal(0);
-
+  searchTerm = signal<string>('');
+  statusLabel = signal<string>('');
 
   constructor(private characterService: CharacterService) {
     this.searchControl.valueChanges.pipe(
@@ -48,6 +50,14 @@ export class HomeComponent {
     this.search();
   }
 
+  hasSearchTerm(): boolean {
+    return !!this.searchControl.value;
+  }
+
+  hasStatus(): boolean {
+    return !!this.statusControl.value;
+  }
+
   search() {
     this.characterService.searchCharacters({
       name: this.searchControl.value || undefined,
@@ -55,11 +65,17 @@ export class HomeComponent {
       page: this.currentPage()
     }).subscribe({
       next: (response: CharacterResponse) => {
-
+        this.totalCharacters.set(response.info.count);
       },
       error: () => {
-
+        this.totalCharacters.set(0);
       }
     });
   }
+
+  onPageChange(page: number) {
+    this.currentPage.set(page);
+    this.search();
+  }
+
 }
