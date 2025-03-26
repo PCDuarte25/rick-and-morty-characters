@@ -1,0 +1,15 @@
+<div class="card h-100 shadow-sm">
+  <img [src]="character.image" [alt]="character.name" class="card-img-top object-fit-cover" style="height: 200px;">
+
+  <div class="card-body">
+    <div class="d-flex justify-content-between mb-3">
+      <h5 class="card-title mb-0">{{ character.name }}</h5>
+      <span [ngClass]="{
+        'text-success': character.status === 'Alive',
+        'text-danger': character.status === 'Dead'
+      }">
+        • {{ character.status === 'Alive' ? 'Vivo' : 'Morto' }}
+      </span>
+    </div>
+  </div>
+</div>
