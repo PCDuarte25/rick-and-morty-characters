@@ -20,6 +20,7 @@ export class HomeComponent {
   statusControl = new FormControl('');
   currentPage = signal(1);
 
+  characters = signal<any[]>([]);
   totalCharacters = signal(0);
   maxTotalCharacters = signal(0);
   searchTerm = signal<string>('');
@@ -58,16 +59,31 @@ export class HomeComponent {
     return !!this.statusControl.value;
   }
 
+  getStatusLabel(): string {
+    const status = this.statusControl.value;
+    switch (status) {
+      case 'alive':
+        return 'Vivo';
+      case 'dead':
+        return 'Morto';
+      default:
+        return '';
+    }
+  }
+
   search() {
+    this.updateSearchCriteria();
     this.characterService.searchCharacters({
       name: this.searchControl.value || undefined,
       status: this.statusControl.value || undefined,
       page: this.currentPage()
     }).subscribe({
       next: (response: CharacterResponse) => {
+        this.characters.set(response.results);
         this.totalCharacters.set(response.info.count);
       },
       error: () => {
+        this.characters.set([]);
         this.totalCharacters.set(0);
       }
     });
@@ -78,4 +94,8 @@ export class HomeComponent {
     this.search();
   }
 
+  private updateSearchCriteria() {
+    this.searchTerm.set(this.searchControl.value || '');
+    this.statusLabel.set(this.getStatusLabel());
+  }
 }
