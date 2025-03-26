@@ -1,0 +1,19 @@
+<div class="container-lg">
+  <header class="mb-4">
+    <h1 class="text-dark mb-0">Personagens R&M</h1>
+  </header>
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex gap-2">
+      <div class="input-group gap-3">
+        <input type="text" [formControl]="searchControl" class="form-control" placeholder="Pesquisar...">
+        <select [formControl]="statusControl" class="form-select">
+          <option value="">Status</option>
+          <option value="alive">Vivo</option>
+          <option value="dead">Morto</option>
+        </select>
+      </div>
+    </div>
+    <small class="text-muted">Total de personagens: {{ maxTotalCharacters() }}</small>
+  </div>
+</div>
