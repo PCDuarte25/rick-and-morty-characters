@@ -7,6 +7,7 @@ import { PaginationComponent } from '../pagination/pagination.component';
 import { CommonModule } from '@angular/common';
 import { Character } from '../services/character.interface';
 import { CharacterResponse } from '../services/character-response.dto';
+import { TranslateStatusPipe } from '../shared/translate-status.pipe';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,7 @@ import { CharacterResponse } from '../services/character-response.dto';
     ReactiveFormsModule,
     CharacterCardComponent,
     PaginationComponent,
+    TranslateStatusPipe,
     CommonModule
   ],
   templateUrl: './home.component.html',
@@ -88,6 +90,7 @@ export class HomeComponent implements OnInit {
     switch (status) {
       case 'alive': return 'Vivo';
       case 'dead': return 'Morto';
+      case 'unknown': return 'Desconhecido';
       default: return '';
     }
   }
