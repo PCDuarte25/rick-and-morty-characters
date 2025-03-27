@@ -6,9 +6,10 @@
       <h5 class="card-title mb-0">{{ character.name }}</h5>
       <span [ngClass]="{
         'text-success': character.status === 'Alive',
-        'text-danger': character.status === 'Dead'
+        'text-danger': character.status === 'Dead',
+        'text-secondary': character.status === 'unknown'
       }">
-        • {{ character.status === 'Alive' ? 'Vivo' : 'Morto' }}
+        • {{ translateStatus(character.status) }}
       </span>
     </div>
 
