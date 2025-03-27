@@ -9,9 +9,9 @@
         <input type="text" [formControl]="searchControl" class="form-control" placeholder="Pesquisar...">
         <select [formControl]="statusControl" class="form-select">
           <option value="">Todos</option>
-          <option value="alive">Vivo</option>
-          <option value="dead">Morto</option>
-          <option value="unknown">Desconhecido</option>
+          <option value="alive">{{ 'alive' | translateStatus }}</option>
+          <option value="dead">{{ 'dead' | translateStatus }}</option>
+          <option value="unknown">{{ 'unknown' | translateStatus }}</option>
         </select>
       </div>
     </div>
@@ -24,7 +24,7 @@
       para
       <span *ngIf="hasSearchTerm()">"{{ searchTerm() }}"</span>
       <span *ngIf="hasSearchTerm() && hasStatus()"> com o status </span>
-      <span *ngIf="hasStatus()">"{{ statusLabel() }}"</span>
+      <span *ngIf="hasStatus()">"{{ statusLabel() | translateStatus }}"</span>
     </span>
   </h4>
 

@@ -82,17 +82,7 @@ export class HomeComponent implements OnInit {
   /** Updates search metadata signals */
   private updateSearchCriteria(): void {
     this.searchTerm.set(this.searchControl.value ?? '');
-    this.statusLabel.set(this.translateStatus(this.statusControl.value));
-  }
-
-  /** Translates status value for display */
-  private translateStatus(status: string | null): string {
-    switch (status) {
-      case 'alive': return 'Vivo';
-      case 'dead': return 'Morto';
-      case 'unknown': return 'Desconhecido';
-      default: return '';
-    }
+    this.statusLabel.set(this.statusControl.value ?? '');
   }
 
   /** Handles successful search response */
