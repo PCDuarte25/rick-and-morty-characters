@@ -9,7 +9,7 @@
         'text-danger': character.status === 'Dead',
         'text-secondary': character.status === 'unknown'
       }">
-        • {{ translateStatus(character.status) }}
+        • {{ character.status | translateStatus }}
       </span>
     </div>
 
