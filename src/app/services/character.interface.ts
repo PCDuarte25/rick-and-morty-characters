@@ -1,3 +1,4 @@
+/** Represents a single character entity */
 export interface Character {
   id: number;
   name: string;

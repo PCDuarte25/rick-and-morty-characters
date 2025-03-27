@@ -1,5 +1,6 @@
 import { Character } from "./character.interface";
 
+/** API response structure for character listings */
 export interface CharacterResponse {
   info: {
     count: number;
