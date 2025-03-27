@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, tap } from 'rxjs';
 import { CharacterResponse } from './character-response.dto';
+import { Character } from './character.interface';
 
 @Injectable({ providedIn: 'root' })
 export class CharacterService {
@@ -25,5 +26,9 @@ export class CharacterService {
     return this.http.get<CharacterResponse>(`${this.baseUrl}?${params}`).pipe(
       tap(response => this.cache.set(cacheKey, response))
     );
+  }
+
+  getCharacterById(id: number): Observable<Character> {
+    return this.http.get<Character>(`${this.baseUrl}/${id}`);
   }
 }
