@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-character-card',
@@ -12,7 +13,9 @@ import { Component, inject, Input } from '@angular/core';
 export class CharacterCardComponent {
   @Input() character: any;
 
+  private router = inject(Router);
+
   viewDetails() {
-    // Implementar depois da paginação.
+    this.router.navigate(['/character', this.character.id]);
   }
 }
