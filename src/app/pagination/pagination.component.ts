@@ -1,23 +1,45 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+  signal
+} from '@angular/core';
 
 @Component({
   selector: 'app-pagination',
   standalone: true,
   templateUrl: './pagination.component.html',
-  imports: [
-    CommonModule
-  ],
+  imports: [CommonModule],
   styleUrls: ['./pagination.component.scss']
 })
-export class PaginationComponent {
-  @Input() currentPage!: number;
-  @Input() totalPages!: number;
+export class PaginationComponent implements OnChanges {
+  /** Current active page number */
+  @Input({ required: true }) currentPage!: number;
+
+  /** Total number of pages available */
+  @Input({ required: true }) totalPages!: number;
+
+  /** Event emitter for page changes */
   @Output() pageChanged = new EventEmitter<number>();
 
-  pages = signal<number[]>([]);
+  /** Array of visible page numbers */
+  readonly pages = signal<number[]>([]);
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['currentPage'] || changes['totalPages']) {
+      this.updateVisiblePages();
+    }
+  }
+
+  /**
+   * Updates the list of visible pages based on current position
+   * Shows up to 5 pages centered around current page
+   */
+  private updateVisiblePages(): void {
     const pages = [];
     const start = Math.max(1, this.currentPage - 2);
     const end = Math.min(this.totalPages, this.currentPage + 2);
@@ -28,7 +50,11 @@ export class PaginationComponent {
     this.pages.set(pages);
   }
 
-  changePage(page: number) {
+  /**
+   * Handles page navigation events
+   * @param page - Target page number
+   */
+  changePage(page: number): void {
     if (page >= 1 && page <= this.totalPages) {
       this.pageChanged.emit(page);
     }
