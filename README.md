@@ -49,10 +49,10 @@ A responsive web application for exploring Rick and Morty characters using the [
 ### Installation
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/rick-morty-explorer.git
+git clone https://github.com/PCDuarte25/rick-and-morty-characters.git
 
 # Install dependencies
-cd rick-morty-explorer
+cd rick-and-morty-characters
 npm install
 
 # Start development server
