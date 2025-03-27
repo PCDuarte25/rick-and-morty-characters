@@ -1,1 +1,20 @@
-<p>character-details works!</p>
+<div class="container py-5" *ngIf="character$ | async as character">
+  <div class="row">
+    <div class="col-md-4 mb-4">
+      <div class="card shadow">
+        <img [src]="character.image" [alt]="character.name" class="card-img-top">
+        <div class="card-body">
+          <h2 class="card-title">{{ character.name }}</h2>
+          <p class="card-text">
+            <span class="badge" [ngClass]="{
+              'bg-success': character.status === 'Alive',
+              'bg-danger': character.status === 'Dead',
+              'bg-secondary': character.status === 'unknown'
+            }">
+              {{ character.status }}
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
