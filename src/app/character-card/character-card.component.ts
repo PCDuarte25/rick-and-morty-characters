@@ -1,21 +1,26 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { Character } from '../services/character.interface';
 
 @Component({
   selector: 'app-character-card',
-  imports: [
-    CommonModule,
-  ],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './character-card.component.html',
   styleUrls: ['./character-card.component.scss']
 })
 export class CharacterCardComponent {
-  @Input() character: any;
+  /** Character data to display */
+  @Input({ required: true }) character!: Character;
 
-  private router = inject(Router);
+  private readonly router = inject(Router);
 
-  viewDetails() {
+  /**
+   * Navigates to character details page
+   * @emits Route navigation to '/character/:id'
+   */
+  viewDetails(): void {
     this.router.navigate(['/character', this.character.id]);
   }
 }
