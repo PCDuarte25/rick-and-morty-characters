@@ -33,6 +33,9 @@
     </div>
   </div>
 
+  <app-pagination [currentPage]="currentPage()" [totalPages]="totalPages()"
+    (pageChanged)="onPageChange($event)"></app-pagination>
+
   <footer class="mt-5 pt-4 text-muted border-top">
     <div class="container">
       Direitos reservados para Pedro Caio

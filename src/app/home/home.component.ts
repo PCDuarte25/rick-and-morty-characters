@@ -1,10 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { CommonModule } from '@angular/common';
 import { CharacterService } from '../services/character.service';
-import { CharacterResponse } from '../services/character-response.dto';
 import { CharacterCardComponent } from '../character-card/character-card.component';
+import { PaginationComponent } from '../pagination/pagination.component';
+import { CommonModule } from '@angular/common';
+import { CharacterResponse } from '../services/character-response.dto';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +13,7 @@ import { CharacterCardComponent } from '../character-card/character-card.compone
   imports: [
     ReactiveFormsModule,
     CharacterCardComponent,
+    PaginationComponent,
     CommonModule
   ],
   templateUrl: './home.component.html',
@@ -24,6 +26,7 @@ export class HomeComponent {
 
   characters = signal<any[]>([]);
   totalCharacters = signal(0);
+  totalPages = signal(0);
   maxTotalCharacters = signal(0);
   searchTerm = signal<string>('');
   statusLabel = signal<string>('');
@@ -83,10 +86,12 @@ export class HomeComponent {
       next: (response: CharacterResponse) => {
         this.characters.set(response.results);
         this.totalCharacters.set(response.info.count);
+        this.totalPages.set(response.info.pages);
       },
       error: () => {
         this.characters.set([]);
         this.totalCharacters.set(0);
+        this.totalPages.set(0);
       }
     });
   }
