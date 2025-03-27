@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { CharacterService } from '../services/character.service';
 import { switchMap } from 'rxjs/operators';
+import { CharacterService } from '../services/character.service';
 import { TranslateStatusPipe } from '../shared/translate-status.pipe';
 
 @Component({
@@ -20,8 +20,10 @@ export class CharacterDetailsComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly characterService = inject(CharacterService);
 
+  /** Observable of character details loaded based on route ID */
   readonly character$ = this.route.params.pipe(
     switchMap(params =>
       this.characterService.getCharacterById(Number(params['id']))
-  ));
+    )
+  );
 }
