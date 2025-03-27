@@ -5,8 +5,19 @@
 
 A responsive web application for exploring Rick and Morty characters using the [Rick and Morty API](https://rickandmortyapi.com/).
 
-![Home Screenshot](![home image](src/app/assets/home_image.png))
-![Character Details Screenshot](![character details image](src/app/assets/character_details_image.png))
+<details>
+<summary>Home Image</summary>
+
+![home image](src/app/assets/home_image.png)
+
+</details>
+
+<details>
+<summary>Character Details</summary>
+
+![character details image](src/app/assets/character_details_image.png)
+
+</details>
 
 ## ✨ Features
 
